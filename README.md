@@ -53,16 +53,6 @@ The script also prints the baseline period in a form you can paste into a method
 3. Run STEP 0 once to install the package.
 4. Edit STEP 1 and run STEP 1 and STEP 2.
 
-### Local
-
-```bash
-git clone https://github.com/<your-username>/mesonet-season-vs-baseline.git
-cd mesonet-season-vs-baseline
-pip install -r requirements.txt
-```
-
-Open `mesonet_season_vs_baseline.py` in VS Code or Jupyter and run it cell by cell. Change `OUT_CSV` to a local path first. The default path `/content/` exists only in Colab.
-
 ## Inputs (STEP 1)
 
 | Setting | Meaning | Example |
@@ -82,9 +72,6 @@ Open `mesonet_season_vs_baseline.py` in VS Code or Jupyter and run it cell by ce
 - **Completeness rule.** A season counts in the baseline only if temperature, precipitation and ETo each cover at least 90% of its days.
 - **Short records.** If the station has fewer than 5 complete earlier years, the script warns you. Call this a short-term comparison, not a long-term or climate normal.
 - **Monthly sums.** Monthly precipitation and ETo totals treat missing days as zero. Check the missing-day count before you report monthly values.
-
-## Limitations
-
 
 ## Data source
 
