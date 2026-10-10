@@ -1,4 +1,4 @@
-# mesonet-season-vs-baseline
+# Current-year-and-long-term-weather-data-extraction-from-Mesonet
 
 Compare one growing season weather at a Kansas Mesonet station with the mean of earlier years.
 
