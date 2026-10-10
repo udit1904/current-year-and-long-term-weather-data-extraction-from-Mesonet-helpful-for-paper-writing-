@@ -1,14 +1,7 @@
-# =====================================================================================
-#  KANSAS MESONET: 2026 GROWING-SEASON WEATHER vs 10-YEAR AVERAGE (Roth farm)
-#  Colab. Run STEP 0 once, then STEP 1 and STEP 2.
-#  Uses the ksmesopy package (pip install ksmesopy), which wraps the Kansas Mesonet REST API.
-# =====================================================================================
-
-# %% STEP 0 - install
 # !pip install -q ksmesopy
 
 # %% STEP 1 - INPUTS
-FARM_LAT, FARM_LON = 38.040880, -101.036685   # EC tower
+FARM_LAT, FARM_LON = 38.040880, -101.036685   
 STATION      = "Roth Tech Farm"   # Kansas Mesonet station; None = nearest one
 SEASON_YEAR  = 2026
 SEASON       = (5, 9)        # first and last month of the growing season (5-9 = May to September)
@@ -50,17 +43,17 @@ try:
 except Exception:
     pass
 start = max(first, pd.Timestamp(f"{BASE_YEARS[0] if BASE_YEARS else 2000}-01-01"))
-end = min(pd.Timestamp(f"{SEASON_YEAR}-12-31"), last)          # never ask for future dates (the server returns HTTP 500)
+end = min(pd.Timestamp(f"{SEASON_YEAR}-12-31"), last)          
 print(f"Requesting {start.date()} to {end.date()}")
 
 WANT = ["TEMP2MAVG", "TEMP2MMIN", "TEMP2MMAX", "PRECIP", "SRAVG", "WSPD2MAVG", "RELHUM2MMIN", "RELHUM2MMAX", "VPDEFAVG"]
-VARS = []                                     # keep only the variables this station serves
+VARS = []                                     
 for v in WANT:
     try:
         ms.request_data(STN, f"{SEASON_YEAR}-07-01", f"{SEASON_YEAR}-07-02", "day", [v]); VARS.append(v)
     except Exception:
         print(f"  {v} not available at {STN} - skipped")
-parts = []                                    # one request per year, so one bad year does not stop the run
+parts = []                                    
 for y in range(start.year, end.year + 1):
     a0 = max(start, pd.Timestamp(f"{y}-01-01")); a1 = min(end, pd.Timestamp(f"{y}-12-31"))
     try:
